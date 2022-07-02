@@ -42,4 +42,20 @@ public class StudentTest {
         // Then
         System.out.println(actual);
     }
+
+    @Test
+    public void setExamScore() {
+        // : Given
+        String firstName = "Leon";
+        String lastName = "Hunter";
+        Double[] examScores = { 100.0 };
+        Student student = new Student(firstName, lastName, examScores);
+
+        // When
+        student.setExamScore(1, 150.0);
+        String output = student.getExamScores();
+
+        // Then
+        System.out.println(output);
+    }
 }
