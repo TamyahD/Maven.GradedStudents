@@ -2,6 +2,7 @@ package io.zipcoder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Student {
     private String firstName;
@@ -62,5 +63,7 @@ public class Student {
         examScores.add(examScore);
     }
 
-
+    public void setExamScore(int examNumber, double newScore) {
+        examScores.set(examNumber-1, newScore);
+    }
 }
