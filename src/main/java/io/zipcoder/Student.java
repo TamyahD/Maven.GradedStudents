@@ -1,5 +1,6 @@
 package io.zipcoder;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,6 +47,7 @@ public class Student {
         String examScore = "";
         /* int var to count number of exams */
         int counter = 0;
+        DecimalFormat df = new DecimalFormat("#.##");
 
         /*
         for each to iterate through arraylist &
@@ -53,10 +55,10 @@ public class Student {
         */
         for (Double score : examScores) {
             counter++;
-            examScore += "Exam " +counter + "-->" +
-                    score +"\n";
+            examScore += "\n\tExam " +counter +
+                    " -> " + df.format(score);
         }
-        return examScore.toString();
+        return examScore;
     }
 
     public void addExamScore(double examScore) {
@@ -65,5 +67,23 @@ public class Student {
 
     public void setExamScore(int examNumber, double newScore) {
         examScores.set(examNumber-1, newScore);
+    }
+
+    public double getAverageExamScore() {
+        double sum = 0.0;
+        for (double score : examScores) {
+            sum += score;
+        }
+        return (sum/examScores.size());
+    }
+
+
+    @Override
+    public String toString() {
+        return "Student Name: " + this.firstName + " " +this.lastName +
+                "\nAverage Score: " +
+                String.format("%.0f",getAverageExamScore()) +
+                "\nExam Scores:" +
+                getExamScores();
     }
 }
