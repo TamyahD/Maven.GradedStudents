@@ -48,7 +48,7 @@ public class Classroom {
     public void removeStudent(String firstName, String lastName) {
         int iF = Arrays.asList(students).indexOf(firstName);
         int iL = Arrays.asList(students).indexOf(lastName);
-        System.out.print(iF+iL);
+//        System.out.print(iF+iL);
 //        for (students[idx].getLastName(); i< students.length -1; idx++) {
 //            students[idx] = students[idx +1];
 //        }

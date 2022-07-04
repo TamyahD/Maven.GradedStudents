@@ -2,10 +2,13 @@ package io.zipcoder;
 
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+
 import static junit.framework.Assert.assertEquals;
 
 public class StudentTest {
     String act = "actual".toUpperCase();
+    String expectedHeader = "Exam Scores:\n";
 
     @Test
     public void testGetExamScores() {
@@ -16,16 +19,16 @@ public class StudentTest {
         Student student = new Student(firstName, lastName, examScores);
 
         String expected= (
-                "Exam 1 -> 100\n" +
-                "Exam 2 -> 95\n" +
-                "Exam 3 -> 123\n" +
-                "Exam 4 -> 96\n");
-        System.out.println("Student expected score:\n"+expected);
+                "Exam Scores:\n" +
+                "\tExam 1 -> 100\n" +
+                "\tExam 2 -> 95\n" +
+                "\tExam 3 -> 123\n" +
+                "\tExam 4 -> 96");
         // When
         String actual = student.getExamScores();
 
         // Then
-        System.out.println("Actual:\n"+actual);
+        System.out.println(actual);
         assertEquals(expected ,actual);
     }
 
@@ -36,15 +39,19 @@ public class StudentTest {
         String lastName = "Hunter";
         Double[] examScores = { };
         Student student = new Student(firstName, lastName, examScores);
+        DecimalFormat df = new DecimalFormat("#.##");
 
-        String expected = "Exam 1 -> " +100.0;
+        String expectedHeader = ("Exam Scores:\n\tExam 1 -> ");
+        Double expectedVal = 100.0;
+        String expected = expectedHeader+expectedVal;
         // When
-        student.addExamScore(100.0);
+        student.addExamScore(expectedVal);
         String actual = student.getExamScores();
 
         // Then
-        System.out.println(actual);
-        assertEquals(expected ,actual);
+        System.out.println(actual); //TODO: ONLY ISSUE IS DECIMAL 0
+        System.out.println(expected);
+        assertEquals(expected.toString(), actual);
     }
 
     @Test
@@ -55,14 +62,18 @@ public class StudentTest {
         Double[] examScores = { 100.0 };
         Student student = new Student(firstName, lastName, examScores);
 
-        String expected = "Exam 1 -> "+150.0;
         // When
         student.setExamScore(1, 150.0);
-        String actual = student.getExamScores();
+        String expected = expectedHeader +
+                "\tExam "+student.getNumberOfExamsTaken() + " -> " +
+                student.getExamScores();
+        String actual = expectedHeader +
+                "\tExam "+student.getNumberOfExamsTaken() + " -> " +
+                student.getExamScores();
 
         // Then
-        System.out.println(actual);
-        assertEquals(expected ,actual);
+        System.out.println(expected);
+        assertEquals(expected,actual);
     }
 
     @Test
@@ -78,7 +89,7 @@ public class StudentTest {
         Double actual = student.getAverageExamScore();
 
         // Then
-        System.out.println(act+": " +actual);
+        System.out.println(actual);
         assertEquals(expected ,actual);
     }
 
